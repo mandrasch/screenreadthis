@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@nut-tree/nut-js": "^1.6.0",
+    "open": "^8.0.5"
+  },
+  "name": "screenread-this",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mandrasch/screenread-this.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mandrasch/screenread-this/issues"
+  },
+  "homepage": "https://github.com/mandrasch/screenread-this#readme",
+  "description": ""
+}
