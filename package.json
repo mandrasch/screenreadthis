@@ -1,14 +1,17 @@
 {
   "dependencies": {
     "@nut-tree/nut-js": "^1.6.0",
-    "open": "^8.0.5"
+    "open": "^8.0.5",
+    "puppeteer": "^8.0.0"
   },
   "name": "screenread-this",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "testcafe": "^1.14.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testcafe chrome tests/"
   },
   "repository": {
     "type": "git",
