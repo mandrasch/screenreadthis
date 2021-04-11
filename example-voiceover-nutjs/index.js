@@ -7,5 +7,5 @@ const open = require('open');
     await open('https://www.a11yproject.com/', {app: {name: open.apps.chrome}});
     
     // try to activate voice over (mac osx)
-    await keyboard.type(Key.SuperLeft, Key.F5);
+    await keyboard.type(Key.LeftSuper, Key.F5);
 })();
