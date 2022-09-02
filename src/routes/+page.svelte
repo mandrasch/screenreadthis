@@ -170,7 +170,7 @@
 
 <svelte:head>
 	<title>Screenread this!</title>
-	<meta name="description" content="Simple demo site which reads accessibility trees" />
+	<meta name="description" content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first." />
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />

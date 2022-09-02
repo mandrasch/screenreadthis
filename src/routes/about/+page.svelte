@@ -1,6 +1,6 @@
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>ScreenreadThis! - About</title>
+	<meta name="description" content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first." />
 </svelte:head>
 
 <div class="content">
