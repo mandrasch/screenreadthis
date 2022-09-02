@@ -2,7 +2,7 @@
 
 Experimental / Work in progress
 
-Live: https://screenthis.mandrasch.eu
+Live: https://screenreadthis.mandrasch.eu
 
 ## Developing
 
