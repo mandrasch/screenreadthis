@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { Jumper } from 'svelte-loading-spinners';
 	import JSONTree from 'svelte-json-tree';
-	import { children } from 'svelte/internal';
 
 	// https://svelte.dev/tutorial/bind-this (get ref to component, nice!)
 	let readNextBtn: HTMLButtonElement,
@@ -178,7 +177,7 @@
 
 <section>
 	<h1>ScreenreadThis!</h1>
-	<p>This is an experimental (!) project to simulate screenreader output.</p>
+	<p>This is an experimental project to simulate screenreader output.</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
