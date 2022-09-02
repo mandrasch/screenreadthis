@@ -1,6 +1,9 @@
 <svelte:head>
 	<title>ScreenreadThis! - About</title>
-	<meta name="description" content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first." />
+	<meta
+		name="description"
+		content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first."
+	/>
 </svelte:head>
 
 <div class="content">
@@ -54,12 +57,13 @@
 	</p>
 	<p>
 		Backend source code: <a href="https://github.com/mandrasch/screenreadthis-api-server"
-			>mandrasch/a11y-tree-api</a
+			>andrasch/screenreadthis-api-server</a
 		>
 		(Hosted on <a href="https://render.com">render.com</a>)
 	</p>
 
 	<h2>Limitations</h2>
+	<p>There can be empty static text in the accessibility tree. This does not mean that the site is inaccessible.</p>
 	<p>
 		Currently only the english language is supported. But the WebSpeech API has support for multiple
 		languages, the language could be detected via "html lang"-attribute.
