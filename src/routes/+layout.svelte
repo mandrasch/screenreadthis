@@ -10,7 +10,7 @@
 </main>
 
 <footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	<p><a href="https://github.com/mandrasch/screenread-this">Source Code (MIT license)</a></p>
 </footer>
 
 <style>

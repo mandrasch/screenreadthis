@@ -21,6 +21,7 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
+		"sass": "^1.54.8",
 		"svelte": "^3.46.0",
 		"svelte-check": "^2.7.1",
 		"svelte-preprocess": "^4.10.6",
@@ -31,6 +32,8 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
-		"cookie": "^0.4.1"
+		"cookie": "^0.4.1",
+		"svelte-json-tree": "^1.0.0",
+		"svelte-loading-spinners": "^0.1.7"
 	}
 }
