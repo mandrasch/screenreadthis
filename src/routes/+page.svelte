@@ -46,7 +46,15 @@
 	});
 
 	async function handleSubmit(loadExampleJson = false) {
+		
 		// TODO: validate url!
+
+		// reset all values
+		currentFocusedNodeIndex = -1;
+		currentFocusedNode = {};
+		successful = false;
+		a11yTreeResult = {};
+
 		try {
 			submitting = true;
 
