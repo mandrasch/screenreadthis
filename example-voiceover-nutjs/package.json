@@ -1,7 +1,0 @@
-{
-    "dependencies": {
-      "@nut-tree/nut-js": "^1.6.0",
-      "open": "^8.0.5"
-    }
-}
-  
