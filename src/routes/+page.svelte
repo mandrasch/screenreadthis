@@ -228,7 +228,7 @@
 		<div class="speechOutputContainer">
 			<h2>Current element</h2>
 			{#if currentFocusedNodeIndex >= 0}
-				{currentFocusedNode?.role}: {currentFocusedNode?.name}
+				{currentFocusedNode?.role}: "{currentFocusedNode?.name}"
 			{:else if a11yTreeResult.hasOwnProperty('name')}
 				Site title: {a11yTreeResult?.name}
 			{:else}
