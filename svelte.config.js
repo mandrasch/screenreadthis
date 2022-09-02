@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-auto';
+// https://kit.svelte.dev/docs/adapters#supported-environments-static-sites
+import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
