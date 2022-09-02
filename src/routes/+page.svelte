@@ -53,7 +53,7 @@
 			const requestedUrlEncoded = encodeURIComponent(requestedUrl);
 			// TODO: use localhost on local dev (via env?)
 			// TODO: use cache?
-			let apiRequestUrl = `https://a11y-tree-api.onrender.com/getA11yTree?url=${requestedUrlEncoded}`;
+			let apiRequestUrl = `https://screenreadthis-api-server.onrender.com/getA11yTree?url=${requestedUrlEncoded}`;
 			if (dev) {
 				console.log('Dev mode', { loadExampleJson, requestedUrlEncoded });
 				apiRequestUrl = `http://localhost:3001/getA11yTree?url=${requestedUrlEncoded}`;
