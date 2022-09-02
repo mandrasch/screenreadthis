@@ -34,7 +34,7 @@ jobs:
           PATHS_BASE: ''
 
       - name: 📂 Sync files via sftp
-        uses: SamKirkland/FTP-Deploy-Action@4
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
           local-dir: ./build/
           server: ${{ secrets.ftp_host }}
