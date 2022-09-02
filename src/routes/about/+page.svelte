@@ -35,7 +35,7 @@
 		<a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis">WebSpeech API.</a>
 	</p>
 	<p>
-		Frontend source code: <a href="https://github.com/mandrasch/screenread-this"
+		Frontend source code: <a href="https://github.com/mandrasch/screenreadthis"
 			>mandrasch/screenread-this</a
 		>
 	</p>
@@ -47,7 +47,7 @@
 		provides a high-level API to control Chrome or Chromium over the DevTools Protocol.
 	</p>
 	<p>
-		Backend source code: <a href="https://github.com/mandrasch/a11y-tree-api"
+		Backend source code: <a href="https://github.com/mandrasch/screenreadthis-api-server"
 			>mandrasch/a11y-tree-api</a
 		>
 	</p>

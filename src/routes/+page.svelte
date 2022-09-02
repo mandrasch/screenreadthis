@@ -216,6 +216,7 @@
 					on:click|preventDefault={() => handleSpeakNextPrevAction(true)}>Read next &raquo;</button
 				>
 			</div>
+			<p><small>Hint: You can also use the keyboard arrow keys.</small></p>
 		</div>
 		<div class="speechOutputContainer">
 			<h2>Current element</h2>
