@@ -12,7 +12,12 @@
 	</p>
 	<p>
 		The goal of this project is to provide an additional way of (quickly) testing the screenreader
-		output of given websites. We have tools like <a href="https://www.webpagetest.org/">WebPageTest</a> for performance testing, <a href="https://webbkoll.dataskydd.net/">Dataskydds webbkoll</a> for privacy testing, <a href="https://digitalbeacon.co/">Beacon</a> for sustainability testing - but there is no simple tool for screenreader output testing? We should change that together!
+		output of given websites. We have tools like <a href="https://www.webpagetest.org/"
+			>WebPageTest</a
+		>
+		for performance testing, <a href="https://webbkoll.dataskydd.net/">Dataskydds webbkoll</a> for
+		privacy testing, <a href="https://digitalbeacon.co/">Beacon</a> for sustainability testing - but
+		there is no simple tool for screenreader output testing? We should change that together!
 	</p>
 	<p>
 		Disclaimer: Serious and professional accessibility testing should be always done with real
@@ -51,6 +56,7 @@
 		Backend source code: <a href="https://github.com/mandrasch/screenreadthis-api-server"
 			>mandrasch/a11y-tree-api</a
 		>
+		(Hosted on <a href="https://render.com">render.com</a>)
 	</p>
 
 	<h2>Limitations</h2>
@@ -59,9 +65,11 @@
 		languages, the language could be detected via "html lang"-attribute.
 	</p>
 	<p>
-		There is currently no support for actually interacting with the page. This would require keeping the
-		connection to Puppeteers browser instance open (session). Maybe a queue is needed if a lot of request are submitted. Happy to hear your suggestions for
-		implementing it!
+		There is currently no support for actually interacting with the page. This would require keeping
+		the connection to Puppeteers browser instance open (session, web socket?) and handle events
+		(click, focus, page navigation, state changes, etc.). Maybe a queue is needed if a lot of
+		requests are submitted as well. Happy to hear your suggestions for implementing this in a
+		pragmatic way!
 	</p>
 	<h2>License</h2>
 	<p>Feel free to fork and improve this project for your use cases!</p>
