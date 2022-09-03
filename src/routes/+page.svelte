@@ -48,11 +48,15 @@
 	});
 
 	async function handleSubmit(loadExampleJson = false) {
-		if (!dataSubmissionTermsAccepted) {
+		if (!dataSubmissionTermsAccepted && !loadExampleJson) {
 			// TODO: show error message next to form field
 			alert('Please accept terms first!');
 			return;
 		}
+
+		if(loadExampleJson)
+			requestedUrl =
+		'https://www.smashingmagazine.com/2021/09/simplifying-form-styles-accent-color/';
 
 		// TODO: validate url!
 
@@ -219,12 +223,16 @@
 
 <section>
 	<h1>ScreenreadThis!</h1>
+	<p>Experimental project, trying to enable easy ways of learning about screenreader testing.</p>
 	<p>
-		Experimental project, trying to enable easy ways of learning about screenreader testing. 
+		The API server (retrieving the accessibility tree) currently runs on a free tier and can be offline from time to time. If the service currently
+		doesn't work, here is a <a href="https://www.youtube.com/watch?v=svpjpAsGThU"
+			>demo video (YouTube)</a
+		>
+		or you can <a href="#" on:click|preventDefault={() => {
+			handleSubmit(true);
+		}}>load a static example</a>.
 	</p>
-	<p>Please
-		note: The API server (retrieving the accessibility tree) currently runs on a free tier. The
-		server can be offline from time to time due to limited resources. If the service currently doesn't work, here is a <a href="https://www.youtube.com/watch?v=svpjpAsGThU">demo video (YouTube)</a>.</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
@@ -254,14 +262,14 @@
 			>
 		</div>
 		<div class="submitButtons">
+			<button type="submit" disabled={submitting}>Screenread this!</button>
 			{#if dev}
 				<button
 					on:click|preventDefault={() => {
 						handleSubmit(true);
-					}}>Load example (dev-only)</button
+					}}>Load static example</button
 				>
 			{/if}
-			<button type="submit" disabled={submitting}>Load page</button>
 		</div>
 	</form>
 
