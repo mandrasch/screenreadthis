@@ -9,7 +9,7 @@
 		readPrevBtn: HTMLButtonElement,
 		requestedUrlInput: HTMLInputElement;
 
-	let requestedUrl = 'https://www.a11yproject.com/';
+	let requestedUrl = 'https://en.wikipedia.org/wiki/Screen_reader';
 	let submitting = false;
 	let successful = false;
 	// TODO:use proper typescript?
@@ -45,7 +45,6 @@
 	});
 
 	async function handleSubmit(loadExampleJson = false) {
-		
 		// TODO: validate url!
 
 		// reset all values
@@ -54,21 +53,22 @@
 		successful = false;
 		a11yTreeResult = {};
 
+		const requestedUrlEncoded = encodeURIComponent(requestedUrl);
+
+		// TODO: use env file
+		// TODO: use cache?
+		let apiRequestUrl = `https://screenreadthis-api-server.onrender.com/getA11yTree?url=${requestedUrlEncoded}`;
+		if (dev) {
+			console.log('Dev mode', { loadExampleJson, requestedUrlEncoded });
+			apiRequestUrl = `http://localhost:3001/getA11yTree?url=${requestedUrlEncoded}`;
+			// local json file for faster testing:
+			if (loadExampleJson) {
+				apiRequestUrl = `/example.json`;
+			}
+		}
+
 		try {
 			submitting = true;
-
-			const requestedUrlEncoded = encodeURIComponent(requestedUrl);
-			// TODO: use localhost on local dev (via env?)
-			// TODO: use cache?
-			let apiRequestUrl = `https://screenreadthis-api-server.onrender.com/getA11yTree?url=${requestedUrlEncoded}`;
-			if (dev) {
-				console.log('Dev mode', { loadExampleJson, requestedUrlEncoded });
-				apiRequestUrl = `http://localhost:3001/getA11yTree?url=${requestedUrlEncoded}`;
-				// local json file for faster testing:
-				if (loadExampleJson) {
-					apiRequestUrl = `/example.json`;
-				}
-			}
 			console.log('Fetching URL: ', apiRequestUrl);
 			const response = await fetch(apiRequestUrl, {
 				method: 'GET',
@@ -83,20 +83,40 @@
 			submitting = false;
 		} catch (error) {
 			console.error(`Error in handleSubmit function: ${error}`);
-			alert(
-				'Error while retrieving the page. Please notice: This project runs on a free tier on render.com and can be offline (if free tier limit is reached).'
-			);
+			if (dev) {
+				alert(`Error while fetching from ${apiRequestUrl}. Is the server running?`);
+			} else {
+				alert(
+					'Error while retrieving the page. This can be caused by malformed HTML or because the API server is down. Please notice: This project currently runs on a free tier on render.com and can be offline (if free limit is reached).'
+				);
+			}
 			submitting = false;
 			successful = false;
 			return;
 		}
 
 		// success! read page title
+		// TODO: merge this into one function!
+
 		window.speechSynthesis.cancel();
 		var msg = new SpeechSynthesisUtterance();
-		msg.lang = 'en-US'; // TODO: retrieve language from page (puppeteer?)
+		msg.lang = 'en-US'; // default language
+		// TODO: How can we wait an speak english first, than the language of the page? we need englisch + something else?
+		// TODO: use https://github.com/tomByrer/web-speech-synth-segmented
+		/*async function getNextAudio( sentence ){
+			let audio = new SpeechSynthesisUtterance(sentence)
+			window.speechSynthesis.speak(audio)
+
+			return new Promise( resolve =>{
+				audio.onend = resolve
+			})
+		} */
+
+		if (a11yTreeResult.lang !== '') {
+			msg.lang = a11yTreeResult.lang;
+		}
 		// TODO: check if name and value exists
-		msg.text = `Page loaded, the site title is: ${a11yTreeResult.name}`;
+		msg.text = `${a11yTreeResult.name}`;
 		window.speechSynthesis.speak(msg);
 
 		// TODO: this currently does not work because element is hidden?
@@ -123,13 +143,22 @@
 			// stop output beforehand
 			window.speechSynthesis.cancel();
 
-			// speak it
-			// TODO: use speak() method
-			var msg = new SpeechSynthesisUtterance();
-			msg.lang = 'en-US'; // TODO: retrieve language from page (puppeteer?)
-			// TODO: check if name and value exists
-			msg.text = `${currentFocusedNode.role}, ${currentFocusedNode.name}`;
-			window.speechSynthesis.speak(msg);
+			// TODO: use general speak() method, double coded currently
+
+			// speak the role (english)
+			// TODO: use https://github.com/tomByrer/web-speech-synth-segmented
+			var roleMsg = new SpeechSynthesisUtterance();
+			roleMsg.lang = 'en-US'; // default language
+			roleMsg.text = `${currentFocusedNode.role}`;
+			window.speechSynthesis.speak(roleMsg);
+
+			var msgElement = new SpeechSynthesisUtterance();
+			msgElement.lang = 'en-US'; // default language (fallback)
+			if (a11yTreeResult.lang !== '') {
+				msgElement.lang = a11yTreeResult.lang;
+			}
+			msgElement.text = `${currentFocusedNode.name}`;
+			window.speechSynthesis.speak(msgElement);
 		}
 	}
 
@@ -170,14 +199,17 @@
 
 <svelte:head>
 	<title>Screenread this!</title>
-	<meta name="description" content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first." />
+	<meta
+		name="description"
+		content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first."
+	/>
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />
 
 <section>
 	<h1>ScreenreadThis!</h1>
-	<p>This is an experimental project to simulate screenreader output.</p>
+	<p>Experimental project, trying to enable easy ways of learning about screenreader testing.</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
@@ -189,7 +221,7 @@
 			placeholder="https://"
 			type="url"
 		/>
-		<div style="display:flex;flex-direction:row;">
+		<div class="submitButtons">
 			{#if dev}
 				<button
 					on:click|preventDefault={() => {
@@ -202,8 +234,13 @@
 	</form>
 
 	{#if submitting}
-		<!-- TODO: add accessible label / state-->
-		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
+		<div class="loadingProgress">
+			<!-- TODO: add accessible label / state-->
+			<span>
+				<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
+			</span>
+			<p>Loading the results can take a minute or two ...</p>
+		</div>
 	{/if}
 
 	<div id="result">
@@ -231,8 +268,7 @@
 				{currentFocusedNode?.role}: "{currentFocusedNode?.name}"
 			{:else if a11yTreeResult.hasOwnProperty('name')}
 				Site title: {a11yTreeResult?.name}
-			{:else}
-			{/if}
+			{:else}{/if}
 		</div>
 		<div class="jsonTreeContainer">
 			<h2>Accessibility Tree snapshot (Puppeteer)</h2>
@@ -248,43 +284,26 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: stretch;
 		flex: 1;
 	}
 
 	h1 {
 		width: 100%;
 	}
+	h2 {
+		font-weight: 700;
+	}
 
 	p {
 		text-align: center;
-		width: 100%;
-		max-width: 600px;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
 	}
 
 	form {
 		display: flex;
 		flex-direction: column;
 		text-align: center;
-		align-items: center;
-		width: 100%;
-		max-width: 600px;
+		align-items: stretch;
 
 		& > * {
 			padding: 10px 20px;
@@ -292,7 +311,12 @@
 		}
 		label,
 		input {
-			width: 100%;
+			flex: 0 0 100%;
+		}
+		.submitButtons {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
 		}
 		button {
 			cursor: pointer;
@@ -309,11 +333,20 @@
 		background: white;
 		padding: 20px;
 		border: 2px solid #333;
-		width: 100%;
-		max-width: 600px;
 		h2 {
 			margin-bottom: 20px;
 			text-align: center;
+		}
+	}
+
+	.loadingProgress {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: center;
+		span {
+			display: flex;
+			justify-content: center;
 		}
 	}
 
@@ -336,7 +369,7 @@
 	.jsonTreeContainer {
 		// override according to https://www.npmjs.com/package/svelte-json-tree
 		/* color */
-		--json-tree-string-color: #cb3f41;
+		/*--json-tree-string-color: #cb3f41;
 		--json-tree-symbol-color: #cb3f41;
 		--json-tree-boolean-color: #112aa7;
 		--json-tree-function-color: #112aa7;
@@ -349,12 +382,12 @@
 		--json-tree-undefined-color: #8d8d8d;
 		--json-tree-date-color: #8d8d8d;
 		--json-tree-internal-color: grey;
-		--json-tree-regex-color: #cb3f41;
+		--json-tree-regex-color: #cb3f41;*/
 		/* position */
-		--json-tree-li-indentation: 1em;
-		--json-tree-li-line-height: 1.3;
+		/*--json-tree-li-indentation: 1em;
+		--json-tree-li-line-height: 1.3;*/
 		/* font */
 		--json-tree-font-size: 14px;
-		--json-tree-font-family: 'Courier New', Courier, monospace;
+		// --json-tree-font-family: 'Courier New', Courier, monospace;
 	}
 </style>

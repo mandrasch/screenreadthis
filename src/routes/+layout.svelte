@@ -10,9 +10,20 @@
 </main>
 
 <footer>
-	<hr style="width:30px;border:1px solid #999;">
-	<p><small>Disclaimer: This is not a real screenreader software, only use real screenreaders for serious testing!</small></p>
-	<p>Source code: <a href="https://github.com/mandrasch/screenreadthis" aria-label="Read more about this on the Github repository page">GitHub</a> (Open Source)</p>
+	<hr style="width:30px;border:1px solid #999;" />
+	<p>
+		<small
+			>Disclaimer: This is not a real screenreader software, only use real screenreaders for serious
+			testing!</small
+		>
+	</p>
+	<p>
+		Source code: <a
+			href="https://github.com/mandrasch/screenreadthis"
+			aria-label="Read more about this on the Github repository page">GitHub</a
+		>
+		(Open Source) | <a href="https://github.com/mandrasch/screenreadthis">Privacy / Imprint</a>
+	</p>
 </footer>
 
 <style>
