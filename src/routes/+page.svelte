@@ -9,7 +9,7 @@
 		readPrevBtn: HTMLButtonElement,
 		requestedUrlInput: HTMLInputElement;
 
-	let requestedUrl = 'https://en.wikipedia.org/wiki/Screen_reader';
+	let requestedUrl = 'https://www.a11yproject.com/posts/everyday-accessibility/';
 	let submitting = false;
 	let successful = false;
 	// TODO:use proper typescript?
@@ -219,8 +219,8 @@
 	<h1>ScreenreadThis!</h1>
 	<p>
 		Experimental project, trying to enable easy ways of learning about screenreader testing. Please
-		note: The API server (retrieving the accessibility tree) currently runs on a free render.com tier,
-		the server can be occupied from time to time.
+		note: The API server (retrieving the accessibility tree) currently runs on a free render.com
+		tier, the server can be occupied from time to time.
 	</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
@@ -234,8 +234,16 @@
 			type="url"
 		/>
 		<div class="formField" style="display:flex;flex-direction:row;width:100%;">
-			<input type="checkbox" style="flex-basis:2rem;width:2rem;" id="dataSubmissionTermsAcceptedCheckbox" bind:checked={dataSubmissionTermsAccepted} />
-			<label for="dataSubmissionTermsAcceptedCheckbox" style="margin-left:10px;font-size:0.9rem; text-align:left;flex: 1 1 100%;">
+			<input
+				type="checkbox"
+				style="flex-basis:2rem;width:2rem;"
+				id="dataSubmissionTermsAcceptedCheckbox"
+				bind:checked={dataSubmissionTermsAccepted}
+			/>
+			<label
+				for="dataSubmissionTermsAcceptedCheckbox"
+				style="margin-left:10px;font-size:0.9rem; text-align:left;flex: 1 1 100%;"
+			>
 				By submitting you accept that your browser connects to a render.com cloud server instance
 				(server region: Frankfurt) and transmits the given URL in order to receive the accessibility
 				tree result. See <a href="https://render.com/privacy">render.com/privacy</a> for all information.</label
@@ -296,8 +304,8 @@
 			<JSONTree value={a11yTreeResult} />
 			<p>
 				<small
-					>The property 'htmlLangAttribute' is not part of the accessibility tree, it's a custom addition by
-					API server.</small
+					>The property 'htmlLangAttribute' is not part of the accessibility tree, it's a custom
+					addition by API server.</small
 				>
 			</p>
 		</div>
@@ -306,6 +314,9 @@
 </section>
 
 <style lang="scss">
+	label {
+		cursor: pointer;
+	}
 	section {
 		display: flex;
 		flex-direction: column;
