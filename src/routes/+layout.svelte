@@ -22,7 +22,8 @@
 			href="https://github.com/mandrasch/screenreadthis"
 			aria-label="Read more about this on the Github repository page">GitHub</a
 		>
-		(Open Source) | <a href="https://github.com/mandrasch/screenreadthis">Privacy / Imprint</a>
+		(Open Source) | <a href="/about">About</a> |
+		<a href="https://github.com/mandrasch/screenreadthis">Privacy / Imprint</a>
 	</p>
 </footer>
 
