@@ -54,9 +54,9 @@
 			return;
 		}
 
-		if(loadExampleJson)
+		if (loadExampleJson)
 			requestedUrl =
-		'https://www.smashingmagazine.com/2021/09/simplifying-form-styles-accent-color/';
+				'https://www.smashingmagazine.com/2021/09/simplifying-form-styles-accent-color/';
 
 		// TODO: validate url!
 
@@ -74,10 +74,11 @@
 		if (dev) {
 			console.log('Dev mode', { loadExampleJson, requestedUrlEncoded });
 			apiRequestUrl = `http://localhost:3001/getA11yTree?url=${requestedUrlEncoded}`;
-			// local json file for faster testing:
-			if (loadExampleJson) {
-				apiRequestUrl = `/example.json`;
-			}
+		}
+
+		// local json file for faster testing:
+		if (loadExampleJson) {
+			apiRequestUrl = `/example.json`;
 		}
 
 		try {
@@ -225,13 +226,17 @@
 	<h1>ScreenreadThis!</h1>
 	<p>Experimental project, trying to enable easy ways of learning about screenreader testing.</p>
 	<p>
-		The API server (retrieving the accessibility tree) currently runs on a free tier and can be offline from time to time. If the service currently
-		doesn't work, here is a <a href="https://www.youtube.com/watch?v=svpjpAsGThU"
-			>demo video (YouTube)</a
+		The API server (retrieving the accessibility tree) currently runs on a free tier and can be
+		offline from time to time. If the service currently doesn't work, here is a <a
+			href="https://www.youtube.com/watch?v=svpjpAsGThU">demo video (YouTube)</a
 		>
-		or you can <a href="#" on:click|preventDefault={() => {
-			handleSubmit(true);
-		}}>load a static example</a>.
+		or you can
+		<a
+			href="#"
+			on:click|preventDefault={() => {
+				handleSubmit(true);
+			}}>load a static example</a
+		>.
 	</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
