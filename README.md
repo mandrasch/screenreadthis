@@ -71,7 +71,7 @@ Source code: https://github.com/mandrasch/screenreadthis-api-server
 
 ## Privacy and Imprint
 
-https://screenreadthis-api-server.onrender.com is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/
+The API server https://screenreadthis-api-server.onrender.com is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/. Personally I don't store (or transmit) personal data of visitors using this service.
 
 ## Credits
 

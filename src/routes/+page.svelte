@@ -22,6 +22,8 @@
 
 	let speechSynthesisSupported: Boolean;
 
+	let dataSubmissionTermsAccepted = false;
+
 	let a11yTreeResult: any = {};
 	let currentFocusedNode: childNode;
 	let currentFocusedNodeIndex = -1;
@@ -45,6 +47,12 @@
 	});
 
 	async function handleSubmit(loadExampleJson = false) {
+		if (!dataSubmissionTermsAccepted) {
+			// TODO: show error message next to form field
+			alert('Please accept terms first!');
+			return;
+		}
+
 		// TODO: validate url!
 
 		// reset all values
@@ -87,7 +95,7 @@
 				alert(`Error while fetching from ${apiRequestUrl}. Is the server running?`);
 			} else {
 				alert(
-					'Error while retrieving the page. This can be caused by malformed HTML or because the API server is down. Please notice: This project currently runs on a free tier on render.com and can be offline (if free limit is reached).'
+					'Error while retrieving the page. This can be caused by malformed HTML or because the API server is currently not reachable. Please try again later.'
 				);
 			}
 			submitting = false;
@@ -209,7 +217,11 @@
 
 <section>
 	<h1>ScreenreadThis!</h1>
-	<p>Experimental project, trying to enable easy ways of learning about screenreader testing. Please note: The API server retrieving the accessibility tree currently runs on a free render.com, the server can be occupied  from time to time.</p>
+	<p>
+		Experimental project, trying to enable easy ways of learning about screenreader testing. Please
+		note: The API server (retrieving the accessibility tree) currently runs on a free render.com tier,
+		the server can be occupied from time to time.
+	</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
@@ -221,6 +233,14 @@
 			placeholder="https://"
 			type="url"
 		/>
+		<div class="formField" style="display:flex;flex-direction:row;width:100%;">
+			<input type="checkbox" style="flex-basis:2rem;width:2rem;" id="dataSubmissionTermsAcceptedCheckbox" bind:checked={dataSubmissionTermsAccepted} />
+			<label for="dataSubmissionTermsAcceptedCheckbox" style="margin-left:10px;font-size:0.9rem; text-align:left;flex: 1 1 100%;">
+				By submitting you accept that your browser connects to a render.com cloud server instance
+				(server region: Frankfurt) and transmits the given URL in order to receive the accessibility
+				tree result. See <a href="https://render.com/privacy">render.com/privacy</a> for all information.</label
+			>
+		</div>
 		<div class="submitButtons">
 			{#if dev}
 				<button
@@ -276,7 +296,7 @@
 			<JSONTree value={a11yTreeResult} />
 			<p>
 				<small
-					>The property 'htmlLangAttribute' is not part of the accessibility tree,custom addition by
+					>The property 'htmlLangAttribute' is not part of the accessibility tree, it's a custom addition by
 					API server.</small
 				>
 			</p>
