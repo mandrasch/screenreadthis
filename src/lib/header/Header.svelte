@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import logo from './svelte-logo.svg';
+	import logo from './logo.png';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="/">
+		<!-- <a href="/">
 			<img src={logo} alt="Logo" />
-		</a>
+		</a> -->
 	</div>
 
 	<nav data-sveltekit-prefetch>
@@ -38,23 +38,8 @@
 		justify-content: space-between;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
+	.corner{
+		width:1rem;
 	}
 
 	nav {

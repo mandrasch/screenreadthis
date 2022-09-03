@@ -209,7 +209,7 @@
 
 <section>
 	<h1>ScreenreadThis!</h1>
-	<p>Experimental project, trying to enable easy ways of learning about screenreader testing.</p>
+	<p>Experimental project, trying to enable easy ways of learning about screenreader testing. Please note: The API server retrieving the accessibility tree currently runs on a free render.com, the server can be occupied  from time to time.</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
@@ -274,7 +274,12 @@
 			<h2>Accessibility tree snapshot (via Puppeteer)</h2>
 
 			<JSONTree value={a11yTreeResult} />
-			<p><small>The property 'htmlLangAttribute' is not part of the accessibility tree.</small></p>
+			<p>
+				<small
+					>The property 'htmlLangAttribute' is not part of the accessibility tree,custom addition by
+					API server.</small
+				>
+			</p>
 		</div>
 		<!-- {/if} -->
 	</div>
