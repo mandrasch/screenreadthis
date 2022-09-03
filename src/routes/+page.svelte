@@ -9,7 +9,8 @@
 		readPrevBtn: HTMLButtonElement,
 		requestedUrlInput: HTMLInputElement;
 
-	let requestedUrl = 'https://www.a11yproject.com/posts/everyday-accessibility/';
+	let requestedUrl =
+		'https://www.smashingmagazine.com/2021/09/simplifying-form-styles-accent-color/';
 	let submitting = false;
 	let successful = false;
 	// TODO:use proper typescript?
@@ -153,13 +154,14 @@
 
 			// TODO: use general speak() method, double coded currently
 
-			// speak the role (english)
-			// TODO: use https://github.com/tomByrer/web-speech-synth-segmented
-			var roleMsg = new SpeechSynthesisUtterance();
-			roleMsg.lang = 'en-US'; // default language
-			roleMsg.text = `${currentFocusedNode.role}`;
-			window.speechSynthesis.speak(roleMsg);
-
+			// speak the role (english) if not a text element
+			// TODO: use https://github.com/tomByrer/web-speech-synth-segmented ?
+			if (currentFocusedNode.role !== 'StaticText') {
+				var roleMsg = new SpeechSynthesisUtterance();
+				roleMsg.lang = 'en-US'; // default language
+				roleMsg.text = `${currentFocusedNode.role}`;
+				window.speechSynthesis.speak(roleMsg);
+			}
 			var msgElement = new SpeechSynthesisUtterance();
 			msgElement.lang = 'en-US'; // default language (fallback)
 			if (a11yTreeResult.htmlLangAttribute !== '') {
@@ -219,8 +221,8 @@
 	<h1>ScreenreadThis!</h1>
 	<p>
 		Experimental project, trying to enable easy ways of learning about screenreader testing. Please
-		note: The API server (retrieving the accessibility tree) currently runs on a free render.com
-		tier, the server can be occupied from time to time.
+		note: The API server (retrieving the accessibility tree) currently runs on a free 
+		tier, the server can be occupied or offline from time to time.
 	</p>
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
@@ -245,9 +247,7 @@
 				style="margin-left:10px;font-size:0.9rem; text-align:left;flex: 1 1 100%;"
 			>
 				By submitting you accept that your browser connects to a render.com cloud server instance
-				(server region: Frankfurt) and transmits the given URL in order to receive the accessibility
-				tree result. See <a href="https://render.com/privacy">render.com/privacy</a> for all information.</label
-			>
+				(server region: Frankfurt / Germany) and transmits the given URL in order to receive the accessibility tree result. See <a href="https://render.com/privacy">render.com/privacy</a> for all information.</label>
 		</div>
 		<div class="submitButtons">
 			{#if dev}
@@ -294,6 +294,8 @@
 			<h2>Current element</h2>
 			{#if currentFocusedNodeIndex >= 0}
 				{currentFocusedNode?.role}: "{currentFocusedNode?.name}"
+
+				<pre style="font-size:12px;">{JSON.stringify(currentFocusedNode)}</pre>
 			{:else if a11yTreeResult.hasOwnProperty('name')}
 				Site title: {a11yTreeResult?.name}
 			{:else}{/if}

@@ -12,14 +12,20 @@
 		!! Disclaimer: Serious and professional accessibility testing should always be done with real
 		screenreader software. This is just an experimental project. !!
 	</p>
-	<p>See the README-file on GitHub for all information:</p>
-	<p>
-		<a
+	<p>See the README-files on GitHub for all information:</p>
+	<ul>
+		<li><a
 			href="https://github.com/mandrasch/screenreadthis#readme"
-			aria-label="README file in github repository screenreadthis"
+			aria-label="Github repository with README"
 			>github.com/mandrasch/screenreadthis</a
-		>
-	</p>
+		></li>
+		<li><a
+			href="https://github.com/mandrasch/screenreadthis-api-server"
+			aria-label="Github repository for api server"
+			>github.com/mandrasch/screenreadthis-api-server</a
+		></li>
+	</ul>
+		
 	<p>Dive deeper into screenreader testing with these introductionary videos:</p>
 	<ul>
 		<li>
