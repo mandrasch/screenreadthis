@@ -112,8 +112,8 @@
 			})
 		} */
 
-		if (a11yTreeResult.lang !== '') {
-			msg.lang = a11yTreeResult.lang;
+		if (a11yTreeResult.htmlLangAttribute !== '') {
+			msg.lang = a11yTreeResult.htmlLangAttribute;
 		}
 		// TODO: check if name and value exists
 		msg.text = `${a11yTreeResult.name}`;
@@ -154,8 +154,8 @@
 
 			var msgElement = new SpeechSynthesisUtterance();
 			msgElement.lang = 'en-US'; // default language (fallback)
-			if (a11yTreeResult.lang !== '') {
-				msgElement.lang = a11yTreeResult.lang;
+			if (a11yTreeResult.htmlLangAttribute !== '') {
+				msgElement.lang = a11yTreeResult.htmlLangAttribute;
 			}
 			msgElement.text = `${currentFocusedNode.name}`;
 			window.speechSynthesis.speak(msgElement);
@@ -271,9 +271,10 @@
 			{:else}{/if}
 		</div>
 		<div class="jsonTreeContainer">
-			<h2>Accessibility Tree snapshot (Puppeteer)</h2>
+			<h2>Accessibility tree snapshot (via Puppeteer)</h2>
 
 			<JSONTree value={a11yTreeResult} />
+			<p><small>The property 'htmlLangAttribute' is not part of the accessibility tree.</small></p>
 		</div>
 		<!-- {/if} -->
 	</div>
