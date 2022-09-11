@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { onMount } from 'svelte';
+	import type { PageLoad } from './$types';
 	import { Jumper } from 'svelte-loading-spinners';
 	import JSONTree from 'svelte-json-tree';
 
@@ -60,54 +61,58 @@
 
 		// TODO: validate url!
 
+		/*if (dev) {
+			console.log('Dev mode', { loadExampleJson, requestedUrl });
+		}*/
+
 		// reset all values
 		currentFocusedNodeIndex = -1;
 		currentFocusedNode = {};
 		successful = false;
 		a11yTreeResult = {};
 
-		const requestedUrlEncoded = encodeURIComponent(requestedUrl);
-
-		// TODO: use env file
-		// TODO: use cache?
-		let apiRequestUrl = `https://screenreadthis-api-server.onrender.com/getA11yTree?url=${requestedUrlEncoded}`;
-		if (dev) {
-			console.log('Dev mode', { loadExampleJson, requestedUrlEncoded });
-			apiRequestUrl = `http://localhost:3001/getA11yTree?url=${requestedUrlEncoded}`;
-		}
-
 		// local json file for faster testing:
 		if (loadExampleJson) {
-			apiRequestUrl = `/example.json`;
-		}
-
-		try {
-			submitting = true;
-			console.log('Fetching URL: ', apiRequestUrl);
-			const response = await fetch(apiRequestUrl, {
+			let response = await fetch('/example.json', {
 				method: 'GET',
 				headers: {
 					Accept: 'application/json'
 				}
 			});
-			console.log({ response });
-			// TODO: use proper typescript
 			a11yTreeResult = await response.json();
-			successful = true;
-			submitting = false;
-		} catch (error) {
-			console.error(`Error in handleSubmit function: ${error}`);
-			if (dev) {
-				alert(`Error while fetching from ${apiRequestUrl}. Is the server running?`);
-			} else {
-				alert(
-					'Error while retrieving the page. This can be caused by malformed HTML or because the API server is currently not reachable. Please try again later.'
-				);
-			}
-			submitting = false;
-			successful = false;
-			return;
 		}
+
+		if (loadExampleJson === false) {
+			// TODO: This is the new code, fetching from server side sveltekit
+			try {
+				submitting = true;
+				const response = await fetch('/pptr-api/get-tree.json', {
+					method: 'POST',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ url: requestedUrl })
+				});
+				
+				a11yTreeResult = await response.json();
+				console.log('Response from POST', a11yTreeResult);
+				successful = true;
+				submitting = false;
+			} catch (error) {
+				console.error(`Error in handleSubmit function: ${error}`);
+				if (dev) {
+					alert(`Error while fetching from API.`);
+				} else {
+					alert(
+						'Error while retrieving the page. This can be caused by malformed HTML or because the API server is currently not reachable. Please try again later.'
+					);
+				}
+				submitting = false;
+				successful = false;
+				return;
+			}
+		} // eo if
 
 		// success! read page title
 		// TODO: merge this into one function!
