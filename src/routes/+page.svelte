@@ -5,6 +5,10 @@
 	import { Jumper } from 'svelte-loading-spinners';
 	import JSONTree from 'svelte-json-tree';
 
+	import Highlight from 'svelte-highlight';
+	import bash from 'svelte-highlight/languages/bash';
+	import github from 'svelte-highlight/styles/github';
+
 	// https://svelte.dev/tutorial/bind-this (get ref to component, nice!)
 	let readNextBtn: HTMLButtonElement,
 		readPrevBtn: HTMLButtonElement,
@@ -94,7 +98,7 @@
 					},
 					body: JSON.stringify({ url: requestedUrl })
 				});
-				
+
 				a11yTreeResult = await response.json();
 				console.log('Response from POST', a11yTreeResult);
 				successful = true;
@@ -215,6 +219,10 @@
 			// TODO: add ctrl for cancel
 		}
 	}
+
+	const installCode = `git clone https://github.com/mandrasch/screenreadthis.git
+npm install
+npm run dev -- --open`;
 </script>
 
 <svelte:head>
@@ -223,16 +231,36 @@
 		name="description"
 		content="Basic web accessibility testing should be possible without the need of installing screenreader software and without the need of learning the different keyboard shortcuts first."
 	/>
+	<!-- highlightjs styles-->
+	{@html github}
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />
 
 <section>
 	<h1>ScreenreadThis!</h1>
-	<p>Experimental project, trying to enable easy ways of learning about screenreader testing.</p>
-	<p>
-		The API server (retrieving the accessibility tree) currently runs on a free tier and can be
-		offline from time to time. If the service currently doesn't work, here is a <a
+	<div class="intro">
+		<p>
+			Experimental project which tries to find easier ways of learning about screenreader testing -
+			without the need of learning all screenreader operation shortcuts first. No more excuses!
+		</p>
+
+		Install and use ScreenreadThis! locally:
+
+		<Highlight language={bash} code={installCode} />
+
+		<p>
+			Built with SvelteKit and puppeteer retrieving the <a
+				href="https://pptr.dev/api/puppeteer.accessibility.snapshot/">accessibility tree snapshot</a
+			>.
+		</p>
+	</div>
+
+	<h2 style="font-size:1.8rem;font-weight:normal; text-align:center;">Online demo</h2>
+
+	<p style="max-width:750px;align-self:center;text-align:left;">
+		This demo currently runs on a free render.com tier and can be unavailable from time to time.
+		If this demo currently doesn't work, here is a <a
 			href="https://www.youtube.com/watch?v=svpjpAsGThU">demo video (YouTube)</a
 		>
 		or you can
@@ -240,9 +268,10 @@
 			href="#"
 			on:click|preventDefault={() => {
 				handleSubmit(true);
-			}}>load a static example</a
+			}}>load a static demo example</a
 		>.
 	</p>
+
 
 	<form on:submit|preventDefault={() => handleSubmit()}>
 		<label for="requestedUrl">URL:</label>
@@ -355,6 +384,14 @@
 		justify-content: center;
 		align-items: stretch;
 		flex: 1;
+
+		.intro {
+			align-self: center;
+			max-width: 750px;
+			p {
+				text-align: left;
+			}
+		}
 	}
 
 	h1 {
