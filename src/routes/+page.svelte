@@ -221,6 +221,7 @@
 	}
 
 	const installCode = `git clone https://github.com/mandrasch/screenreadthis.git
+cd screenreadthis/
 npm install
 npm run dev -- --open`;
 </script>

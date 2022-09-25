@@ -3,7 +3,9 @@
 	import bash from 'svelte-highlight/languages/bash';
 	import github from 'svelte-highlight/styles/github';
 
+	// TODO: double coded, implement as comp?
 	const installCode = `git clone https://github.com/mandrasch/screenreadthis.git
+cd screenreadthis/
 npm install
 npm run dev -- --open`;
 </script>
