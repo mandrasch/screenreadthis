@@ -92,6 +92,10 @@ The demo app is hosted on european cloud Instances via render.com, see https://r
 - https://www.npmjs.com/package/svelte-loading-spinners
 - https://www.npmjs.com/package/svelte-highlight
 
+## TODOs
+
+- Add render.com health check route (or use root `/`?) https://render.com/docs/deploys#health-checks
+
 ## License
 
 Feel free to fork and improve this project for your own use cases! The frontend is provided as open source under MIT license. The project is based on SvelteKits official example project. See package.json for all open source libraries used.
