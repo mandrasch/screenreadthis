@@ -23,7 +23,7 @@
 			aria-label="Read more about this on the Github repository page">GitHub</a
 		>
 		(Open Source) | <a href="/about">About</a> |
-		<a href="https://github.com/mandrasch/screenreadthis">Privacy / Imprint</a>
+		<a href="https://github.com/mandrasch/screenreadthis#privacy-and-imprint">Privacy / Imprint</a>
 	</p>
 </footer>
 

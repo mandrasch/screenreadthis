@@ -82,7 +82,7 @@ Deploy as Node Webservice, e.g. on render.com: https://render.com/docs/deploy-sv
 
 ## Privacy and Imprint
 
-The demo app is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/. Personally I don't store (or transmit) personal data of visitors using this service. 
+The demo app is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/. Personally I don't store (or transmit) personal data of visitors using this service. By submitting a URL please make sure that there is no personal data handling involved in the URL.
 
 ## Credits
 
