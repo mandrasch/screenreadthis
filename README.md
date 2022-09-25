@@ -1,6 +1,6 @@
 # ScreenreadThis!
 
-Experimental demo / Work in progress. The goal of this project is to demonstrate an additional way of (quickly) testing the screenreader output of websites. Built with SvelteKit and puppeteer retrieving the accessibility tree snapshot.
+Experimental demo / Work in progress. The goal of this project is to demonstrate an additional way of (quickly) testing the screenreader output of websites. Built with SvelteKit and puppeteer (retrieving the accessibility tree snapshot).
 
 ```bash
 git clone https://github.com/mandrasch/screenreadthis.git
