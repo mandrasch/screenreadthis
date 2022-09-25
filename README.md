@@ -2,8 +2,18 @@
 
 Experimental demo / Work in progress. The goal of this project is to demonstrate an additional way of (quickly) testing the screenreader output of websites.
 
-- Frontend: https://screenreadthis.mandrasch.eu
-- API server: https://github.com/mandrasch/screenreadthis-api-server
+```bash
+git clone https://github.com/mandrasch/screenreadthis.git
+npm install
+npm run dev -- --open
+```
+
+## Demo
+
+- https://screenreadthis.onrender.com
+- Demo video: https://www.youtube.com/watch?v=svpjpAsGThU
+
+## Disclaimer
 
 !! Disclaimer: Serious and professional accessibility testing should always be done with real screenreader software. This is just an experimental project. !!
 
@@ -24,6 +34,14 @@ Happy to hear your ideas or see your solutions to this in the future!
 
 ## Technical documentation
 
+Built with [SvelteKit](https://kit.svelte.dev/) and puppeteer retrieving the [accessibility tree snapshot](https://pptr.dev/api/puppeteer.accessibility.snapshot/). 
+
+The frontend is implemented via speech
+output is realized via [WebSpeech API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
+
+This web app loads the [Accessibility Tree](https://developer.mozilla.org/en-US/docs/Glossary/Accessibility_tree)
+of the provided website URL via Puppeteer. Puppeteer is written in NodeJS and can launch headless chrome browser instances on the command line, which then can be acessed via methods like `page.goto()`. The accessibility tree representation is retrieved via [Accessibility.snapshot](https://pptr.dev/api/puppeteer.accessibility.snapshot/).
+
 ## Local development
 
 ```bash
@@ -31,8 +49,6 @@ npm run dev
 # or start the server and open the app in a new browser tab:
 npm run dev -- --open
 ```
-
-The local dev site assumes you have https://github.com/mandrasch/screenreadthis-api-server running on localhost.
 
 ## Building
 
@@ -46,17 +62,12 @@ You can preview the production build with `npm run preview`.
 
 !! Please change the API server url to your own API server instance (see: https://github.com/mandrasch/screenreadthis-api-server). !!
 
-### Frontend
+## Deployment
 
-The frontend is implemented with [SvelteKit](https://kit.svelte.dev/) The speech
-output is realized via [WebSpeech API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
+The `@sveltejs/adapter-node` is used for deployment.
+https://kit.svelte.dev/docs/adapters#supported-environments-node-js
 
-### Backend (API)
-
-This web app loads the [Accessibility Tree](https://developer.mozilla.org/en-US/docs/Glossary/Accessibility_tree)
-of the provided website URL from an API server via Puppeteer. Puppeteer is written in NodeJS and can launch headless chrome browser instances on the command line, which then can be acessed via methods like `page.goto()`. The accessibility tree representation is retrieved via [Accessibility.snapshot](https://pptr.dev/api/puppeteer.accessibility.snapshot/).
-
-Source code: https://github.com/mandrasch/screenreadthis-api-server
+Deploy as Node Webservice, e.g. on render.com: https://render.com/docs/deploy-sveltekit. You need to set `NODE_VERSION` to `16.x` on render.com, see for more information: https://render.com/docs/node-version.
 
 ### Limitations
 
@@ -71,7 +82,7 @@ Source code: https://github.com/mandrasch/screenreadthis-api-server
 
 ## Privacy and Imprint
 
-The API server https://screenreadthis-api-server.onrender.com is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/. Personally I don't store (or transmit) personal data of visitors using this service. By submitting the URL 
+The demo app is hosted on european cloud Instances via render.com, see https://render.com/privacy for more information. Contact information / imprint: https://matthias-andrasch.eu/blog/impressum-datenschutz/. Personally I don't store (or transmit) personal data of visitors using this service. 
 
 ## Credits
 
@@ -79,6 +90,7 @@ The API server https://screenreadthis-api-server.onrender.com is hosted on europ
 - https://rodneylab.com/using-fetch-sveltekit/
 - https://www.npmjs.com/package/svelte-json-tree
 - https://www.npmjs.com/package/svelte-loading-spinners
+- https://www.npmjs.com/package/svelte-highlight
 
 ## License
 
